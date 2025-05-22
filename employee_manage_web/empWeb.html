@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intelligent Employee Assistant System</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+      }
+      #container {
+        width: 80%;
+        margin: 0 auto; /* Center the container */
+      }
+
+      .navbar {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      }
+
+      .navbar-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;
+        margin: 0;
+        font-family: "Arial", sans-serif;
+      }
+
+      .navbar-logout {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .navbar-logout:hover {
+        text-decoration: underline;
+      }
+
+      .navbar-logout:hover {
+        text-decoration: underline;
+      }
+
+      .content-section {
+        padding: 20px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .search-form {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 20px 0;
+        gap: 10px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .search-form input[type="text"],
+      .search-form select {
+        width: 200px;
+        margin: 5px;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .search-form input[type="submit"],
+      .search-form input[type="reset"] {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      .search-form input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+      }
+
+      .search-form input[type="reset"] {
+        background-color: #6c757d;
+        color: white;
+      }
+
+      /* Table Styles */
+      .employee-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-family: Arial, sans-serif;
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .employee-table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .employee-table th {
+        padding: 15px 12px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .employee-table tbody tr {
+        border-bottom: 1px solid #e9ecef;
+        transition: all 0.3s ease;
+      }
+
+      .employee-table tbody tr:hover {
+        background-color: #f8f9fa;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .employee-table td {
+        padding: 15px 12px;
+        color: #495057;
+        font-size: 14px;
+      }
+
+      .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        margin: 0 auto;
+      }
+
+      .avatar.harry {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+      }
+
+      .avatar.hermione {
+        background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+      }
+
+      .avatar.ron {
+        background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%);
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .btn-edit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-edit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-delete {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+      }
+
+      .btn-delete:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+      }
+
+      .gender-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+
+      .gender-male {
+        background-color: #e3f2fd;
+        color: #1976d2;
+      }
+
+      .gender-female {
+        background-color: #fce4ec;
+        color: #c2185b;
+      }
+
+      .position-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .position-manager {
+        background-color: #fff3e0;
+        color: #ef6c00;
+      }
+
+      .position-designer {
+        background-color: #f3e5f5;
+        color: #7b1fa2;
+      }
+
+      .position-developer {
+        background-color: #e8f5e8;
+        color: #2e7d32;
+      }
+
+      /* Footer Styles */
+      .footer {
+        background-color: #6c757d;
+        color: white;
+        text-align: center;
+        padding: 30px 20px;
+        margin-top: 40px;
+        font-family: Arial, sans-serif;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <!-- Top Navigation Bar -->
+      <div class="navbar">
+        <h1 class="navbar-title">Intelligent Learning Assistant System</h1>
+        <a href="#" class="navbar-logout">Logout</a>
+      </div>
+
+      <!-- Section 2 - Search Form -->
+      <div class="search-form">
+        <h2>Employee Search</h2>
+        <form action="/search" method="post">
+          <label for="name">Name:</label>
+          <input type="text" id="name" placeholder="Enter name" name="name" />
+
+          <label
+            >Gender:
+            <select name="gender">
+              <option value="">All</option>
+              <option value="1">Male</option>
+              <option value="0">Female</option>
+            </select>
+          </label>
+
+          <label
+            >Job:
+            <select name="job">
+              <option value="">All Positions</option>
+              <option value="0">Manager</option>
+              <option value="1">Designer</option>
+              <option value="2">Developer</option>
+              <option value="3">Tester</option>
+              <option value="4">HR</option>
+              <option value="5">Sales</option>
+              <option value="6">Marketing</option>
+              <option value="7">Support</option>
+              <option value="8">Intern</option>
+              <option value="9">Other</option>
+            </select>
+          </label>
+
+          <input type="submit" value="Search" />
+          <input type="reset" value="Reset" />
+        </form>
+      </div>
+
+      <!-- Section 3 - Employee Table Display -->
+      <div class="content-section">
+        <h2>Employee Information Management</h2>
+        <table class="employee-table">
+          <thead>
+            <tr>
+              <!-- th for table header -->
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Avatar</th>
+              <th>Position</th>
+              <th>Join Date</th>
+              <th>Last Operation</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Harry Potter</td>
+              <td><span class="gender-badge gender-male">Male</span></td>
+              <td>
+                <img src="images/hp.jpg" alt="HP" class="avatar harry" />
+              </td>
+              <td>
+                <span class="position-badge position-manager">Manager</span>
+              </td>
+              <td>2023-09-01</td>
+              <td>2024-05-22 10:30:15</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-edit">Edit</button>
+                  <button class="btn btn-delete">Delete</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <!-- td table data -->
+              <td>Hermione Granger</td>
+              <td><span class="gender-badge gender-female">Female</span></td>
+              <td>
+                <img src="images/HM.jpg" alt="HG" class="avatar harry" />
+              </td>
+              <td>
+                <span class="position-badge position-developer">Developer</span>
+              </td>
+              <td>2023-09-01</td>
+              <td>2024-05-22 14:45:32</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-edit">Edit</button>
+                  <button class="btn btn-delete">Delete</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Ron Weasley</td>
+              <td><span class="gender-badge gender-male">Male</span></td>
+              <td>
+                <img src="images/RW.jpg" alt="RW" class="avatar ron" />
+              </td>
+              <td>
+                <span class="position-badge position-designer">Designer</span>
+              </td>
+              <td>2023-09-15</td>
+              <td>2024-05-22 09:12:47</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-edit">Edit</button>
+                  <button class="btn btn-delete">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Footer Copyright Area -->
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="company-name">Thomas Zhang, Northeastern University</div>
+          <div class="copyright-text">
+            Copyright 2006-2024 All Rights Reserved
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
