@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intelligent Employee Assistant System</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+      }
+      #container {
+        width: 80%;
+        margin: 0 auto; /* Center the container */
+      }
+
+      .navbar {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      }
+
+      .navbar-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;
+        margin: 0;
+        font-family: "Arial", sans-serif;
+      }
+
+      .navbar-logout {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .navbar-logout:hover {
+        text-decoration: underline;
+      }
+
+      .navbar-logout:hover {
+        text-decoration: underline;
+      }
+
+      .content-section {
+        padding: 20px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .search-form {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 20px 0;
+        gap: 10px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .search-form h2 {
+        width: 100%;
+        margin: 0 0 15px 0;
+        color: #495057;
+      }
+
+      .search-form form {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+      }
+
+      .search-form label {
+        display: flex;
+        flex-direction: row;
+        font-weight: 500;
+        color: #495057;
+        gap: 5px;
+      }
+
+      .search-form input[type="text"],
+      .search-form select {
+        width: 180px;
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .search-form input[type="text"]:focus,
+      .search-form select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      /* 统一按钮样式 */
+      .search-form button,
+      .search-form input[type="submit"],
+      .search-form input[type="reset"] {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        min-width: 100px;
+      }
+
+      .search-form button[type="button"],
+      .search-form input[type="submit"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .search-form button[type="button"]:hover,
+      .search-form input[type="submit"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      }
+
+      .search-form button[type="reset"],
+      .search-form input[type="reset"] {
+        background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+        color: white;
+      }
+
+      .search-form button[type="reset"]:hover,
+      .search-form input[type="reset"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(108, 117, 125, 0.4);
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+        margin-left: auto;
+      }
+
+      /* Table Styles */
+      .employee-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-family: Arial, sans-serif;
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .employee-table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .employee-table th {
+        padding: 15px 12px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .employee-table tbody tr {
+        border-bottom: 1px solid #e9ecef;
+        transition: all 0.3s ease;
+      }
+
+      .employee-table tbody tr:hover {
+        background-color: #f8f9fa;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .employee-table td {
+        padding: 15px 12px;
+        color: #495057;
+        font-size: 14px;
+      }
+
+      .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        margin: 0 auto;
+      }
+
+      .avatar.harry {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+      }
+
+      .avatar.hermione {
+        background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+      }
+
+      .avatar.ron {
+        background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%);
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .btn-edit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-edit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-delete {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+      }
+
+      .btn-delete:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+      }
+
+      .gender-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+
+      .gender-male {
+        background-color: #e3f2fd;
+        color: #1976d2;
+      }
+
+      .gender-female {
+        background-color: #fce4ec;
+        color: #c2185b;
+      }
+
+      .position-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .position-manager {
+        background-color: #fff3e0;
+        color: #ef6c00;
+      }
+
+      .position-designer {
+        background-color: #f3e5f5;
+        color: #7b1fa2;
+      }
+
+      .position-developer {
+        background-color: #e8f5e8;
+        color: #2e7d32;
+      }
+
+      /* Footer Styles */
+      .footer {
+        background-color: #6c757d;
+        color: white;
+        text-align: center;
+        padding: 30px 20px;
+        margin-top: 40px;
+        font-family: Arial, sans-serif;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <!-- Top Navigation Bar -->
+      <div class="navbar">
+        <h1 class="navbar-title">Employee Management System</h1>
+        <a href="#" class="navbar-logout">Logout</a>
+      </div>
+
+      <!-- Section 2 - Search Form -->
+      <div class="search-form">
+        <h2>Employee Search</h2>
+        <form action="/search" method="post">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            v-model="searchForm.name"
+            placeholder="Enter name"
+            name="name"
+          />
+
+          <label for="gender">Gender:</label>
+          <select name="gender" v-model="searchForm.gender">
+            <option value="">All</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+          </select>
+
+          <label for="job">Position:</label>
+          <select name="job" v-model="searchForm.job">
+            <option value="">All Positions</option>
+            <option value="1">Manager</option>
+            <option value="2">Designer</option>
+            <option value="3">Developer</option>
+            <option value="4">Tester</option>
+            <option value="5">HR</option>
+            <option value="6">Sales</option>
+            <option value="7">Marketing</option>
+            <option value="8">Support</option>
+            <option value="9">Intern</option>
+            <option value="10">Other</option>
+          </select>
+
+          <button type="button" v-on:click="searchEmployee">Search</button>
+          <button type="reset" v-on:click="clearSearchForm">Reset</button>
+        </form>
+      </div>
+
+      <!-- Section 3 - Employee Table Display -->
+      <div class="content-section">
+        <h2>Employee Information Management</h2>
+        <table class="employee-table">
+          <thead>
+            <tr>
+              <!-- th for table header -->
+              <th>Index</th>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Avatar</th>
+              <th>Position</th>
+              <th>Join Date</th>
+              <th>Last Operation</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(empl, index) in employees" :key="empl.id">
+              <td>{{ index + 1 }}</td>
+              <td>{{ empl.name }}</td>
+              <td>
+                <span
+                  class="gender-badge"
+                  :class="{'gender-male': empl.gender == 1, 'gender-female': empl.gender == 2}"
+                >
+                  {{ empl.gender == 1 ? 'Male' : 'Female' }}
+                </span>
+              </td>
+              <td>
+                <img :src="empl.image" :alt="empl.name" class="avatar" />
+              </td>
+              <td>
+                <span
+                  class="position-badge"
+                  :class="{'position-manager': empl.position === '1', 'position-designer': empl.position === '2', 'position-developer': empl.position === '3'}"
+                  >{{ empl.job === '1' ? 'Manager' : empl.job === '2' ?
+                  'Designer' : empl.job === '3' ? 'Developer' : empl.job === '4'
+                  ? 'Tester' : empl.job === '5' ? 'HR' : empl.job === '6' ?
+                  'Sales' : empl.job === '7' ? 'Marketing' : empl.job === '8' ?
+                  'Support' : empl.job === '9' ? 'Intern' : 'Other' }}
+                </span>
+              </td>
+              <td>{{ empl.joinDate }}</td>
+              <td>{{ empl.lastOperation }}</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-edit">Edit</button>
+                  <button class="btn btn-delete">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Footer Copyright Area -->
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="company-name">Thomas Zhang, Northeastern University</div>
+          <div class="copyright-text">
+            Copyright 2006-2024 All Rights Reserved
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // JavaScript code can be added here for interactivity
+      let trs = document.querySelectorAll("tr");
+      for (let i = 0; i < trs.length; i++) {
+        trs[i].addEventListener("mouseenter", function () {
+          trs[i].style.backgroundColor = "#f0f0f0";
+        });
+        trs[i].addEventListener("mouseleave", function () {
+          trs[i].style.backgroundColor = "#fff";
+        });
+      }
+    </script>
+    <script src="https://unpkg.com/vue@3.2.47/dist/vue.global.js"></script>
+
+    <script src="./js/axios.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            searchForm: {
+              // 封装用户输入的查询条件
+              name: "",
+              gender: "",
+              job: "",
+            },
+            employees: [],
+          };
+        },
+        // 方法
+        methods: {
+          searchEmployee() {
+            // 发送请求
+            axios
+              .get(
+                `https://web-server.itheima.net/emps/list?name=${this.searchForm.name}&gender=${this.searchForm.gender}&job=${this.searchForm.job}`
+              )
+              .then((response) => {
+                this.employees = response.data.data;
+              })
+              .catch((error) => {
+                console.error("Error fetching employee data:", error);
+              });
+          },
+          clearSearchForm() {
+            // 清空搜索条件
+            this.searchForm.name = "";
+            this.searchForm.gender = "";
+            this.searchForm.job = "";
+            this.searchEmployee();
+          },
+
+        },
+        mounted() {
+            // 组件挂载后执行
+            this.searchEmployee();
+          },
+      }).mount("#container");
+    </script>
+  </body>
+</html>
