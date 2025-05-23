@@ -4,6 +4,12 @@ import { createApp } from "https://unpkg.com/vue@3.2.47/dist/vue.esm-browser.js"
 export const app = createApp({
   data() {
     return {
+      searchForm: {
+        // 封装用户输入的查询条件
+        name: "",
+        gender: "",
+        job: "",
+      },
       employees: [
         {
           name: "Harry Potter",
@@ -55,6 +61,20 @@ export const app = createApp({
         },
       ],
     };
+  },
+  // 方法
+  methods: {
+    searchEmployee() {
+      // 处理搜索逻辑
+      console.log("Searching for employees with criteria:", this.searchForm);
+      // 在这里可以添加过滤逻辑
+    },
+    clear() {
+      // 清空搜索条件
+      this.searchForm.name = "";
+      this.searchForm.gender = "";
+      this.searchForm.job = "";
+    },
   },
 }).mount("#container");
 
