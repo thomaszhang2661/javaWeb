@@ -325,108 +325,27 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Harry Potter</td>
-              <td><span class="gender-badge gender-male">Male</span></td>
+            <tr v-for="(empl, index) in employees" :key="empl.id">
+              <td>{{ empl.name }}</td>
               <td>
-                <img src="images/hp.jpg" alt="HP" class="avatar harry" />
+                <span
+                  class="gender-badge"
+                  :class="{'gender-male': empl.gender == 1, 'gender-female': empl.gender == 0}"
+                  >{{ empl.gender == 1 ? 'Male' : 'Female' }}</span
+                >
               </td>
               <td>
-                <span class="position-badge position-manager">Developer</span>
-              </td>
-              <td>2023-09-01</td>
-              <td>2024-05-22 10:30:15</td>
-              <td>
-                <div class="action-buttons">
-                  <button class="btn btn-edit">Edit</button>
-                  <button class="btn btn-delete">Delete</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <!-- td table data -->
-              <td>Hermione Granger</td>
-              <td><span class="gender-badge gender-female">Female</span></td>
-              <td>
-                <img src="images/HM.jpg" alt="HG" class="avatar harry" />
+                <img :src="empl.avatar" :alt="empl.name" class="avatar" />
               </td>
               <td>
-                <span class="position-badge position-developer">Developer</span>
+                <span
+                  class="position-badge"
+                  :class="{'position-manager': empl.position === 'Manager', 'position-designer': empl.position === 'Designer', 'position-developer': empl.position === 'Developer'}"
+                  >{{ empl.position }}</span
+                >
               </td>
-              <td>2023-09-01</td>
-              <td>2024-05-22 14:45:32</td>
-              <td>
-                <div class="action-buttons">
-                  <button class="btn btn-edit">Edit</button>
-                  <button class="btn btn-delete">Delete</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Ron Weasley</td>
-              <td><span class="gender-badge gender-male">Male</span></td>
-              <td>
-                <img src="images/RW.jpg" alt="RW" class="avatar ron" />
-              </td>
-              <td>
-                <span class="position-badge position-designer">Designer</span>
-              </td>
-              <td>2023-09-15</td>
-              <td>2024-05-22 09:12:47</td>
-              <td>
-                <div class="action-buttons">
-                  <button class="btn btn-edit">Edit</button>
-                  <button class="btn btn-delete">Delete</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Albus Dumbledore</td>
-              <td><span class="gender-badge gender-male">Male</span></td>
-              <td>
-                <img src="images/AD.jpeg" alt="AD" class="avatar dumbledore" />
-              </td>
-              <td>
-                <span class="position-badge position-manager">Manager</span>
-              </td>
-              <td>2023-09-01</td>
-              <td>2024-05-22 10:30:15</td>
-              <td>
-                <div class="action-buttons">
-                  <button class="btn btn-edit">Edit</button>
-                  <button class="btn btn-delete">Delete</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Severus Snape</td>
-              <td><span class="gender-badge gender-male">Male</span></td>
-              <td>
-                <img src="images/ss.jpg" alt="SS" class="avatar snape" />
-              </td>
-              <td>
-                <span class="position-badge position-manager">Manager</span>
-              </td>
-              <td>2023-09-01</td>
-              <td>2024-05-22 10:30:15</td>
-              <td>
-                <div class="action-buttons">
-                  <button class="btn btn-edit">Edit</button>
-                  <button class="btn btn-delete">Delete</button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Minerva McGonagall</td>
-              <td><span class="gender-badge gender-female">Female</span></td>
-              <td>
-                <img src="images/MM.jpg" alt="MM" class="avatar mcgonagall" />
-              </td>
-              <td>
-                <span class="position-badge position-manager">Manager</span>
-              </td>
-              <td>2023-09-01</td>
-              <td>2024-05-22 10:30:15</td>
+              <td>{{ empl.joinDate }}</td>
+              <td>{{ empl.lastOperation }}</td>
               <td>
                 <div class="action-buttons">
                   <button class="btn btn-edit">Edit</button>
@@ -461,5 +380,6 @@
         });
       }
     </script>
+    <script src="js/data.js" type="module"></script>
   </body>
 </html>
