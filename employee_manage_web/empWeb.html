@@ -266,7 +266,7 @@
     <div id="container">
       <!-- Top Navigation Bar -->
       <div class="navbar">
-        <h1 class="navbar-title">Intelligent Learning Assistant System</h1>
+        <h1 class="navbar-title">Employee Management System</h1>
         <a href="#" class="navbar-logout">Logout</a>
       </div>
 
@@ -332,7 +332,7 @@
                 <img src="images/hp.jpg" alt="HP" class="avatar harry" />
               </td>
               <td>
-                <span class="position-badge position-manager">Manager</span>
+                <span class="position-badge position-manager">Developer</span>
               </td>
               <td>2023-09-01</td>
               <td>2024-05-22 10:30:15</td>
@@ -380,6 +380,60 @@
                 </div>
               </td>
             </tr>
+            <tr>
+              <td>Albus Dumbledore</td>
+              <td><span class="gender-badge gender-male">Male</span></td>
+              <td>
+                <img src="images/AD.jpeg" alt="AD" class="avatar dumbledore" />
+              </td>
+              <td>
+                <span class="position-badge position-manager">Manager</span>
+              </td>
+              <td>2023-09-01</td>
+              <td>2024-05-22 10:30:15</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-edit">Edit</button>
+                  <button class="btn btn-delete">Delete</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Severus Snape</td>
+              <td><span class="gender-badge gender-male">Male</span></td>
+              <td>
+                <img src="images/ss.jpg" alt="SS" class="avatar snape" />
+              </td>
+              <td>
+                <span class="position-badge position-manager">Manager</span>
+              </td>
+              <td>2023-09-01</td>
+              <td>2024-05-22 10:30:15</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-edit">Edit</button>
+                  <button class="btn btn-delete">Delete</button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Minerva McGonagall</td>
+              <td><span class="gender-badge gender-female">Female</span></td>
+              <td>
+                <img src="images/MM.jpg" alt="MM" class="avatar mcgonagall" />
+              </td>
+              <td>
+                <span class="position-badge position-manager">Manager</span>
+              </td>
+              <td>2023-09-01</td>
+              <td>2024-05-22 10:30:15</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-edit">Edit</button>
+                  <button class="btn btn-delete">Delete</button>
+                </div>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -394,5 +448,18 @@
         </div>
       </footer>
     </div>
+
+    <script>
+      // JavaScript code can be added here for interactivity
+      let trs = document.querySelectorAll("tr");
+      for (let i = 0; i < trs.length; i++) {
+        trs[i].addEventListener("mouseenter", function () {
+          trs[i].style.backgroundColor = "#f0f0f0";
+        });
+        trs[i].addEventListener("mouseleave", function () {
+          trs[i].style.backgroundColor = "#fff";
+        });
+      }
+    </script>
   </body>
 </html>
