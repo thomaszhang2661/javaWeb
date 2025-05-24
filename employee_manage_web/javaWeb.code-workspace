@@ -1,0 +1,15 @@
+{
+  "folders": [
+	{
+		"name": "javaWeb",
+		"path": ".."
+	},
+	{
+		"name": "JS-Vue",
+		"path": "../../../Downloads/JS-Vue"
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "javaWeb"
+  }
+}
